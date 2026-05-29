@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ישיבת עֹז הַתּוֹרָה</title>
+   
+    <style>
+/* סקשן הרבנים - משולב ומסודר */
+.rabbis-section {
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
+    background-color: transparent; /* מוודא שאין רקע דורסני */
+}
+
+.rabbis-section h2 {
+    color: #826531;
+    font-size: 2em;
+    margin-bottom: 30px;
+    display: block; /* מוודא שזה תופס שורה שלמה */
+}
+
+.rabbis-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.rabbi-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* אנימציה ייחודית לכרטיס הרב */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.rabbi-card:hover {
+    transform: translateY(-15px) scale(1.05);
+}
+
+.rabbi-frame {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 8px solid #c5a059;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.5);
+    background: radial-gradient(circle, #fcf0d5, #c5a059);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* אנימציית סיבוב עדינה ומתמדת למסגרת */
+    transition: all 0.4s ease;
+}
+
+.rabbi-card:hover .rabbi-frame {
+    border-color: #826531;
+    box-shadow: 0 0 30px rgba(130, 101, 49, 0.8), inset 0 0 15px rgba(0,0,0,0.2);
+}
+
+.rabbi-frame img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+.rabbi-card:hover .rabbi-frame img {
+    transform: scale(1.1);
+}
+
+.rabbi-name {
+    margin-top: 15px;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #826531;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.rabbi-card:hover .rabbi-name {
+    color: #2b2519;
+    transform: scale(1.05);
+}
+
+        /* --- עיצוב בסיסי ורקע קלף מחוספס אמיתי --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2e7c9;
+            background-image: url('https://cdn.discordapp.com/attachments/1349006833678815326/1509866990385369168/image.png?ex=6a1abcb6&is=6a196b36&hm=20b22881d343a1b268594faab17be228e78be70b4e874a085a8245a7138c754f&');
+            color: #2b2519;
+            overflow-x: hidden;
+        }
+
+        /* פריסה מלאה על כל המסך בלי שוליים לבנים */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- באנר Hero חדש עם סרטון רקע חי --- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 6px 20px rgb(0, 0, 0);
+        }
+        
+        /* אלמנט הוידאו שתופס את כל שטח הבאנר */
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* שכבת ערפל כהה מעל הוידאו כדי שהטקסט יישאר קריא וברור */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(43, 37, 25, 0.65), rgba(43, 37, 25, 0.65));
+            z-index: 2;
+        }
+
+        /* התוכן של ה-Hero שיושב מעל הוידאו והשכבה הכהה */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* אנימציית כניסה מרשימה מלמעלה */
+            animation: heroFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-title {
+            font-size: 5em;
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.85);
+            color: #f7e7c4;
+            /* אנימציית פעימת צבע קלה לשם הישיבה */
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 3px 3px 10px rgba(0,0,0,0.85); }
+            to { text-shadow: 0 0 20px rgba(247, 231, 196, 0.5), 3px 3px 10px rgba(0,0,0,0.85); }
+        }
+
+        .hero-subtitle {
+            font-size: 2em;
+            margin: 15px 0 35px 0;
+            text-shadow: 2px 2px 6px rgb(0, 0, 0);
+            font-weight: 300;
+        }
+
+        .hero-btn {
+            background: transparent;
+            color: #f7e7c4;
+            border: 2px solid #f7e7c4;
+            padding: 14px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 4px rgb(0, 0, 0);
+            /* אנימציה שהכפתור יפעם וימשוך תשומת לב */
+            animation: buttonPulse 2s infinite;
+        }
+
+        @keyframes buttonPulse {
+            0% { box-shadow: 0 0 0 0 rgba(247, 231, 196, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(247, 231, 196, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(247, 231, 196, 0); }
+        }
+
+        .hero-btn:hover {
+            background-color: #f7e7c4;
+            color: #2b2519;
+            text-shadow: none;
+            box-shadow: 0 0 25px rgba(247, 231, 196, 0.8);
+            transform: scale(1.05);
+            animation: none; /* מפסיק לפעום ב-hover */
+        }
+
+        /* --- תוכן ועמודים --- */
+        #home-page {
+            display: block;
+            margin-top: 20px;
+        }
+
+        /* תשתית לאנימציית גלילה לכל הסקשנים הראשיים */
+        .content-section, .video-section, .home-gallery-section, .ticker-section, .rabbis-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* קלאס שיתווסף אוטומטית בגלילה באמצעות JS */
+        .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section {
+            background-color:  rgba(196, 189, 161, 0.65);
+            backdrop-filter: blur(2px);
+            padding: 50px 40px;
+            border-radius: 12px;
+            border: 1px solid #dcd1b4;
+            text-align: center;
+            box-shadow: 0 4px 20px rgb(43, 37, 25);
+            margin-bottom: 40px;
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
+        }
+
+        .content-section:hover {
+            box-shadow: 0 10px 30px rgba(43, 37, 25, 0.5);
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            color: #826531;
+            font-size: 2.4em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        /* אנימציית קו תחתון מתרחב לכותרות */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #826531;
+            transition: width 0.8s ease 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .animate-in h2::after {
+            width: 100%;
+        }
+
+        p {
+            font-size: 1.25em;
+            line-height: 1.8;
+            color: #423b2e;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* --- גלריית תמונות עמוד הבית (8 תמונות לסימטריה) --- */
+        .home-gallery-section {
+            background-color:  rgba(196, 189, 161, 0.65);
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid #dcd1b4;
+            box-shadow: 0 4px 20px rgb(43, 37, 25);
+            margin-bottom: 40px;
+        }
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .home-gallery-item {
+            background-color: #fff;
+            border: 1px solid #dcd1b4;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .home-gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(130, 101, 49, 0.3);
+        }
+        .home-gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .home-gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        /* --- אזור סרטוני וידאו --- */
+        .video-section {
+            background-color:  rgba(196, 189, 161, 0.65);
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid #dcd1b4;
+            box-shadow: 0 4px 20px rgb(43, 37, 25);
+            margin-bottom: 40px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .video-box {
+            background-color: #fff;
+            border: 1px solid #dcd1b4;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, opacity 0.6s ease;
+        }
+        .video-box:hover {
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 12px 24px rgba(130, 101, 49, 0.3);
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #3a3326;
+            margin: 15px 0 5px 0;
+            text-align: right;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+        .video-box:hover .video-title {
+            color: #826531;
+        }
+
+        /* --- קרוסלה נעה אוטומטית (תמונות ריקות) --- */
+        .ticker-section {
+            background-color:  rgba(196, 189, 161, 0.65);
+            padding: 30px 0;
+            border-radius: 12px;
+            border: 1px solid #dcd1b4;
+            box-shadow: 0 4px 20px rgb(43, 37, 25);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        .ticker-section h3 {
+            text-align: center;
+            color: #826531;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            font-weight: bold;
+        }
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background:  rgba(156, 148, 124, 0.534);
+            padding: 20px 0;
+            border-top: 4px dashed #826531;
+            border-bottom: 4px dashed #826531;
+        }
+        .ticker {
+            display: flex;
+            width: max-content;
+            animation: marquee 35s linear infinite;
+        }
+        .ticker:hover {
+            animation-play-state: paused;
+        }
+        .ticker-item {
+            flex-shrink: 0;
+            padding: 0 12px;
+        }
+        .ticker-item img {
+            height: 160px;
+            width: 240px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid #f4edd2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+        }
+        .ticker-item img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+        }
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(50%, 0, 0); }
+        }
+
+        /* --- גלריה מלאה (20 תמונות ריקות) --- */
+        #gallery-page {
+            display: none;
+            margin-top: 20px;
+        }
+        .back-btn {
+            color: #826531;
+            background: none;
+            border: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 30px;
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .back-btn:hover {
+            color: #2b2519;
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+        .full-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .full-gallery-item {
+            background-color: #fff;
+            border: 1px solid #dcd1b4;
+            border-radius: 8px;
+            padding: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .full-gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(130, 101, 49, 0.25);
+        }
+        .full-gallery-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .full-gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- Lightbox תמונות --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(23, 20, 14, 0.95);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .lightbox.show {
+            opacity: 1;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85%;
+            border: 4px solid #f4edd2;
+            border-radius: 6px;
+            transform: scale(0.7);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+        }
+        .lightbox.show .lightbox-img {
+            transform: scale(1);
+        }
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #f4edd2;
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .close-btn:hover {
+            color: #c5a059;
+            transform: rotate(90deg);
+        }
+        .arrow {
+            position: absolute;
+            color: #f4edd2;
+            font-size: 55px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: color 0.3s ease, transform 0.3s ease;
+            user-select: none;
+        }
+        .arrow:hover {
+            color: #c5a059;
+        }
+        .arrow-left { left: 25px; }
+        .arrow-left:hover { transform: translateY(-50%) translateX(-5px); }
+        .arrow-right { right: 25px; }
+        .arrow-right:hover { transform: translateY(-50%) translateX(5px); }
+
+        footer {
+            margin-top: 80px;
+            padding: 35px 0;
+            text-align: center;
+            border-top: 1px solid #dcd1b4;
+            background-color: rgba(244, 237, 210, 0.5);
+        }
+
+        .social-footer a {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        .social-footer a:hover {
+            transform: scale(1.15) rotate(5deg);
+        }
+        .social-footer svg {
+            transition: filter 0.3s ease;
+        }
+        .social-footer a:hover svg {
+            filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6));
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px 10px; }
+            .hero-title { font-size: 3em; }
+            .video-grid, .home-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="מקום לקישור" type="video/mp4">
+            הדפדפן שלך לא תומך בניגון וידאו.
+        </video>
+        <div class="hero-overlay"></div>
+       
+        <div class="hero-content">
+            <div class="hero-title">עֹז הַתּוֹרָה</div>
+            <div class="hero-subtitle">מקום לגידול, לתורה, ולעשייה.</div>
+            <button class="hero-btn" onclick="document.getElementById('footer-details').scrollIntoView({behavior: 'smooth'});">לפרטים נוספים</button>
+        </div>
+    </div>
+
+    <div class="container">
+       
+        <main id="home-page">
+            <section class="content-section">
+                <h2>ברוכים הבאים</h2>
+                <p>אנו עובדים על בניית האתר כדי להציג בפניכם את רוח הישיבה שלנו. בקרוב תמצאו כאן מידע מפורט על סדרי הלימוד, הרשמה ועוד. נשמח לעדכן אתכם.</p>
+            </section>
+
+            <section class="video-section">
+                <h2>שיעורים ומדיה מהישיבה</h2>
+                <div class="video-grid">
+                    <div class="video-box">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/Sz_vS9ze7Wc" title="סרטון 1" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-title">שיעור תורה שבעל פה</div>
+                    </div>
+                    <div class="video-box">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/bdQZUegB4ew" title="סרטון 2" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-title">חוזר בשאלה בעימות מול הרב אמנון יצחק שליט״א!</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="home-gallery-section">
+                <h2>גלריית תמונות מהישיבה</h2>
+                <div class="home-grid">
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+1" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+2" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+3" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+4" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+5" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+6" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+7" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+8" class="clickable-img"></div>
+                </div>
+            </section>
+
+            <section class="ticker-section">
+                <h3>רגעים מהישיבה</h3>
+                <div class="ticker-wrap">
+                    <div class="ticker">
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+1"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+2"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+3"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+4"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+5"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+6"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+1"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+2"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+3"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+4"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+5"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+6"></a></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <main id="gallery-page">
+            <button class="back-btn" onclick="showHomePage()">← חזרה לעמוד הבית</button>
+            <div class="full-gallery-grid">
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+1" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+2" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+3" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+4" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+5" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+6" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+7" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+8" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+9" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+10" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+11" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+12" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+13" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+14" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+15" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+16" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+17" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+18" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+19" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+20" class="clickable-img"></div>
+            </div>
+        </main>
+
+    </div>
+
+    <div id="lightboxModal" class="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <span class="arrow arrow-left" onclick="changeImage(-1)">&#10094;</span>
+        <img id="lightboxImg" class="lightbox-img" src="">
+        <span class="arrow arrow-right" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+
+<section class="rabbis-section">
+    <h2>רבני הישיבה</h2>
+    <div class="rabbis-grid">
+       
+        <div class="rabbi-card">
+            <div class="rabbi-frame">
+                <img src="לינק-לתמונה-1.jpg" alt="שם הרב 1">
+            </div>
+            <div class="rabbi-name">ראש הישיבה</div>
+        </div>
+
+        <div class="rabbi-card">
+            <div class="rabbi-frame">
+                <img src="לינק-לתמונה-2.jpg" alt="שם הרב 2">
+            </div>
+            <div class="rabbi-name">המשגיח</div>
+        </div>
+
+        <div class="rabbi-card">
+            <div class="rabbi-frame">
+                <img src="לינק-לתמונה-3.jpg" alt="שם הרב 3">
+            </div>
+            <div class="rabbi-name">הרב השלישי</div>
+        </div>
+
+        <div class="rabbi-card">
+            <div class="rabbi-frame">
+                <img src="לינק-לתמונה-4.jpg" alt="שם הרב 4">
+            </div>
+            <div class="rabbi-name">הרב הרביעי</div>
+        </div>
+       
+
+    </div>
+</section>
+
+
+    <footer id="footer-details">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <p><strong>כתובת:</strong> .......</p>
+                <p><strong>טלפון:</strong> ........</p>
+            </div>
+
+            <div class="footer-col">
+                <p><strong>ראש הישיבה:</strong> .......</p>
+                <p><strong>שעות פעילות:</strong> ........</p>
+                <p><strong>סגנון לימוד:</strong> .........</p>
+            </div>
+        </div>
+
+<div class="social-footer">
+    <p style="font-weight: bold; color: #826531;">הישארו מחוברים איתנו:</p>
+    <a href="כאן-תדביק-את-הקישור-לערוץ-שלך" target="_blank" class="youtube-link">
+        <svg width="60" height="42" viewBox="0 0 24 24" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+    </a>
+</div>
+
+        <p style="text-align: center; padding-bottom: 20px;">כל הזכויות שמורות לישיבת עֹז הַתּוֹרָה © 2026</p>
+       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    </footer>
+   
+    <script>
+        const homePage = document.getElementById('home-page');
+        const galleryPage = document.getElementById('gallery-page');
+       
+        function showGalleryPage() {
+            homePage.style.display = 'none';
+            galleryPage.style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'}); // שיפור לגלילה חלקה למעלה
+            refreshLightboxImages();
+        }
+
+        function showHomePage() {
+            galleryPage.style.display = 'none';
+            homePage.style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'}); // שיפור לגלילה חלקה למעלה
+            refreshLightboxImages();
+        }
+
+        let currentImgIndex = 0;
+        let activeImages = [];
+        const lightbox = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        function refreshLightboxImages() {
+            const currentMain = homePage.style.display === 'none' ? galleryPage : homePage;
+            activeImages = Array.from(currentMain.querySelectorAll('.clickable-img'));
+           
+            activeImages.forEach((img, index) => {
+                img.onclick = null;
+                img.onclick = () => openLightbox(index);
+            });
+        }
+
+        function openLightbox(index) {
+            if(activeImages.length === 0) return;
+            currentImgIndex = index;
+            lightbox.style.display = 'flex';
+            // הוספת השהיה קטנטנה בשביל להפעיל את האנימציה של ה-CSS
+            setTimeout(() => {
+                lightbox.classList.add('show');
+            }, 10);
+            lightboxImg.src = activeImages[currentImgIndex].src;
+        }
+
+        function closeLightbox() { 
+            lightbox.classList.remove('show');
+            setTimeout(() => {
+                lightbox.style.display = 'none'; 
+            }, 400); // מחכה לסיום האנימציה
+        }
+
+        function changeImage(direction) {
+            if(activeImages.length === 0) return;
+            
+            // אפקט פייד-אאוט קטן למעבר בין תמונות בלייטבוקס
+            lightboxImg.style.opacity = '0';
+            lightboxImg.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                currentImgIndex += direction;
+                if (currentImgIndex >= activeImages.length) currentImgIndex = 0;
+                else if (currentImgIndex < 0) currentImgIndex = activeImages.length - 1;
+                lightboxImg.src = activeImages[currentImgIndex].src;
+                
+                lightboxImg.style.opacity = '1';
+                lightboxImg.style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+       
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex' || lightbox.classList.contains('show')) {
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'ArrowRight') changeImage(1);
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            refreshLightboxImages();
+           
+            // --- מערכת Intersection Observer חכמה לאנימציות גלילה לכל הסקשנים ---
+            const animatedSections = document.querySelectorAll(".content-section, .video-section, .home-gallery-section, .ticker-section, .rabbis-section");
+            
+            const scrollObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("animate-in");
+                        // אם רוצים שהאנימציה תקרה רק פעם אחת, מבטלים את המעקב:
+                        scrollObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedSections.forEach(section => scrollObserver.observe(section));
+
+            // פתרון ספציפי לוידאו שביקשת במקור
+            const videoBoxes = document.querySelectorAll(".video-box");
+            const videoObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show-on-scroll");
+                        videoObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            videoBoxes.forEach(box => videoObserver.observe(box));
+        });
+    </script>
+</body>
+</html>
