@@ -6,6 +6,70 @@
     <title>ישיבת עֹז הַתּוֹרָה</title>
    
     <style>
+
+.donate-section-banner {
+    background: linear-gradient(135deg, #2b2519, #4a3e28);
+    padding: 30px;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    border: 2px solid #c5a059;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.donate-section-banner h3 {
+    color: #f7e7c4;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.page-donate-btn {
+    display: inline-block;
+    padding: 15px 50px;
+    background-color: #c5a059;
+    color: #2b2519;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    animation: donatePulse 2s infinite;
+    transition: transform 0.3s ease;
+}
+
+.page-donate-btn:hover {
+    transform: scale(1.05);
+    background-color: #f7e7c4;
+}
+
+@keyframes donatePulse {
+    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(197, 160, 89, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+}
+
+/* כפתור תרומה בולט בתפריט */
+.donate-btn {
+    background-color: #c5a059 !important; /* זהב בולט */
+    color: #2b2519 !important; /* כהה לניגודיות */
+    padding: 8px 20px !important;
+    border-radius: 50px !important;
+    font-weight: 900 !important;
+    animation: donatePulse 2s infinite !important;
+    border: 2px solid #f7e7c4 !important;
+    transition: transform 0.3s ease !important;
+}
+
+.donate-btn:hover {
+    transform: scale(1.1);
+    background-color: #f7e7c4 !important;
+}
+
+@keyframes donatePulse {
+    0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+}
+
 /* --- עיצוב לו"ז בגודל כרטיסייה סטנדרטית מלאה --- */
 .schedule-section {
     width: 100%;
@@ -986,6 +1050,7 @@
             <li><a onclick="showGalleryPage();">גלריה</a></li>
             <li><a onclick="showHomePage(); document.querySelector('.rabbis-section').scrollIntoView({behavior: 'smooth'});">הרבנים</a></li>
             <li><a onclick="document.getElementById('footer-details').scrollIntoView({behavior: 'smooth'});">צור קשר</a></li>
+            <li><a href="https://www.matara.pro/nedarimplus/online/?mosad=7016718" target="_blank" class="donate-btn">לתרומה לישיבה</a></li>
         </ul>
     </nav>
 
@@ -1038,7 +1103,7 @@
                     <div class="schedule-event">סדר א'</div>
                 </div>
                 <div class="schedule-row" style="--delay: 3;">
-                    <div class="schedule-time">אחר - הצוהריים</div>
+                    <div class="schedule-time">אחר - הצהריים</div>
                     <div class="schedule-event">סדר ב'</div>
                 </div>
                 <div class="schedule-row" style="--delay: 4;">
@@ -1069,6 +1134,12 @@
         </div>
     </details>
 </section>
+
+<div class="donate-section-banner">
+        <h3>רוצים להיות שותפים לתורה של ישיבת עוז התורה?</h3>
+        <a href="https://www.matara.pro/nedarimplus/online/?mosad=7016718" target="_blank" class="page-donate-btn">לחצו כאן לתרומה מאובטחת</a>
+    </div>
+
             <section class="video-section">
                 <h2>שיעורים ומדיה מהישיבה</h2>
                 <div class="video-grid">
@@ -1090,14 +1161,14 @@
             <section class="home-gallery-section">
                 <h2>גלריית תמונות מהישיבה</h2>
                 <div class="home-grid">
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+1" class="clickable-img"></div>
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+2" class="clickable-img"></div>
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+3" class="clickable-img"></div>
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+4" class="clickable-img"></div>
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+5" class="clickable-img"></div>
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+6" class="clickable-img"></div>
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+7" class="clickable-img"></div>
-                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://placehold.co/400x300/e6dcb8/5c4a2c?text=תמונה+ריקה+8" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://i.ibb.co/CsbLjJvM/IMG-1405.jpg" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://i.ibb.co/fGDW1WLC/IMG-1784.jpg" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://i.ibb.co/JjVSzWH5/IMG-2160.jpg" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://i.ibb.co/ynW47g1F/IMG-2161.jpg" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://i.ibb.co/Y4ZDW3pz/IMG-2166.jpg" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://i.ibb.co/n886GdYw/IMG-2165.jpg" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="https://i.ibb.co/wr25zV5n/IMG-2167.jpg" class="clickable-img"></div>
+                    <div class="home-gallery-item" onclick="showGalleryPage()"><img src="" class="clickable-img"></div>
                 </div>
             </section>
 
@@ -1105,46 +1176,45 @@
                 <h3>רגעים מהישיבה</h3>
                 <div class="ticker-wrap">
                     <div class="ticker">
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+1"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+2"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+3"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+4"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+5"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+6"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+1"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+2"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+3"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+4"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+5"></a></div>
-                        <div class="ticker-item"><a href="#"><img src="https://placehold.co/240x160/826531/f4edd2?text=נע+6"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://i.ibb.co/CsbLjJvM/IMG-1405.jpg"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://i.ibb.co/ynW47g1F/IMG-2161.jpg"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://i.ibb.co/Y4ZDW3pz/IMG-2166.jpg"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://i.ibb.co/fGDW1WLC/IMG-1784.jpg"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://i.ibb.co/JjVSzWH5/IMG-2160.jpg"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://i.ibb.co/n886GdYw/IMG-2165.jpg"></a></div>
+                        <div class="ticker-item"><a href="#"><img src="https://i.ibb.co/wr25zV5n/IMG-2167.jpg"></a></div>
+                        <div class="ticker-item"><a href="#"><img src=""></a></div>
+                        <div class="ticker-item"><a href="#"><img src=""></a></div>
+                        <div class="ticker-item"><a href="#"><img src=""></a></div>
+                        <div class="ticker-item"><a href="#"><img src=""></a></div>
+                        <div class="ticker-item"><a href="#"><img src=""></a></div>
                     </div>
                 </div>
             </section>
         </main>
-
         <main id="gallery-page">
             <button class="back-btn" onclick="showHomePage()">← חזרה לעמוד הבית</button>
             <div class="full-gallery-grid">
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+1" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+2" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+3" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+4" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+5" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+6" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+7" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+8" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+9" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+10" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+11" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+12" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+13" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+14" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+15" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+16" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+17" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+18" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+19" class="clickable-img"></div>
-                <div class="full-gallery-item"><img src="https://placehold.co/500x380/e6dcb8/5c4a2c?text=גלריה+20" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://i.ibb.co/CsbLjJvM/IMG-1405.jpg" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://i.ibb.co/fGDW1WLC/IMG-1784.jpg" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://i.ibb.co/JjVSzWH5/IMG-2160.jpg" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://i.ibb.co/ynW47g1F/IMG-2161.jpg" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://i.ibb.co/Y4ZDW3pz/IMG-2166.jpg" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://i.ibb.co/n886GdYw/IMG-2165.jpg" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="https://i.ibb.co/wr25zV5n/IMG-2167.jpg" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
+                <div class="full-gallery-item"><img src="" class="clickable-img"></div>
             </div>
         </main>
 
